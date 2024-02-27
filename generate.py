@@ -71,7 +71,7 @@ def main():
         model=model_path,
         tensor_parallel_size=args.world_size,
     )
-    sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=args.maxlen)
+    sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=args.maxlen, seed=args.seed)
 
 
     pairs = args.pairs   
