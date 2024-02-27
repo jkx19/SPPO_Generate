@@ -54,8 +54,8 @@ def main(args):
 
     candidates_texts = list(zip(chosen_all, reject_all, *all_generated))
 
-    prompts_all = prompts_all[:100]
-    candidates_texts = candidates_texts[:100]
+    # prompts_all = prompts_all[:100]
+    # candidates_texts = candidates_texts[:100]
 
     if args.multi_thread:
         import threading
