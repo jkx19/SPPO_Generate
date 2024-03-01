@@ -71,14 +71,13 @@ def main():
         model=model_path,
         tensor_parallel_size=args.world_size,
     )
-    sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=args.maxlen, seed=args.seed)
-
 
     pairs = args.pairs   
 
     os.makedirs(args.output_dir, exist_ok=True)
 
-    for p in range(pairs):
+    for p in range(pairs):        
+        sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=args.maxlen, seed=p*50)
         response = llm.generate(prompts, sampling_params)
         output = list(map(lambda x: x.outputs[0].text, response))
         f = open(f"{args.output_dir}/responses_{p}.json", "w")

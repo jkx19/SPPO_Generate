@@ -1,22 +1,22 @@
 export HF_HOME="/data/jkx/.cache"
 
-MODEL="mistralai/Mistral-7B-Instruct-v0.2"
-OUTDIR="mistral02"
+# MODEL="mistralai/Mistral-7B-Instruct-v0.2"
+# OUTDIR="mistral"
 
 
-# MODEL="alignment-handbook/zephyr-7b-sft-full"
-# OUTDIR="zephyr-sft"
+MODEL="/data/huizhuo/share/ckpt_dpo_chosen/checkpoint-956"
+OUTDIR="mistral-dpo-it-1"
 
-PAIRS=3
+PAIRS=5
 
 #####################
 # Generate Data
 #####################
 
-# python generate.py --model $MODEL --maxlen 1024 --output_dir "generated/$OUTDIR" --pairs $PAIRS --world_size 8
+python generate.py --model $MODEL --maxlen 1024 --output_dir "generated/$OUTDIR" --pairs $PAIRS --world_size 8
 
 
-# CUDA=6
+# CUDA=7
 # SCPU=$(($CUDA*7))
 # PCUDA=$(($CUDA+1))
 # ECPU=$(($PCUDA*7))
@@ -24,5 +24,5 @@ PAIRS=3
 
 # taskset -c "$SCPU-$ECPU" python rank.py --output_dir $OUTDIR --pairs $PAIRS --numgpu 8 --gpu $CUDA
 
-python compute_prob.py --output_dir $OUTDIR --pairs $PAIRS
+# python compute_prob.py --output_dir $OUTDIR --pairs $PAIRS
 
