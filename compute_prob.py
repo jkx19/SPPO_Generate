@@ -70,4 +70,4 @@ if __name__ == "__main__":
     args = parse_arguments()
     from_ranks(args)
     data = Dataset.from_parquet(f"generated/{args.output_dir}/all.parquet")
-    data.push_to_hub(f"jikaixuan/{args.output_dir}_generated")
+    data.push_to_hub(f"UCLAML/{args.output_dir}_generated")

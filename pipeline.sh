@@ -4,8 +4,8 @@ export HF_HOME="/data/jkx/.cache"
 # OUTDIR="mistral"
 
 
-MODEL="/data/huizhuo/share/ckpt_dpo_chosen/checkpoint-956"
-OUTDIR="mistral-dpo-it-1"
+MODEL="../RPO-Chosen/checkpoint-956"
+OUTDIR="rpo-chosen"
 
 PAIRS=5
 
@@ -13,10 +13,10 @@ PAIRS=5
 # Generate Data
 #####################
 
-python generate.py --model $MODEL --maxlen 1024 --output_dir "generated/$OUTDIR" --pairs $PAIRS --world_size 8
+# python generate.py --model $MODEL --maxlen 2048 --output_dir "generated/$OUTDIR" --pairs $PAIRS --world_size 8
 
 
-# CUDA=7
+# CUDA=4
 # SCPU=$(($CUDA*7))
 # PCUDA=$(($CUDA+1))
 # ECPU=$(($PCUDA*7))
@@ -24,5 +24,5 @@ python generate.py --model $MODEL --maxlen 1024 --output_dir "generated/$OUTDIR"
 
 # taskset -c "$SCPU-$ECPU" python rank.py --output_dir $OUTDIR --pairs $PAIRS --numgpu 8 --gpu $CUDA
 
-# python compute_prob.py --output_dir $OUTDIR --pairs $PAIRS
+python compute_prob.py --output_dir $OUTDIR --pairs $PAIRS
 
